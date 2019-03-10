@@ -13,7 +13,9 @@ To specify the channel to embed, pass a hash parameter at the end of the URL. Fo
 https://faultyserver.github.io/stream-embed/#amfaulty
 ```
 
-Currently, the embed is configured to load the stream at 854x480 (480p equivalent) and a volume of 90%. In the future, I'd like to expose these as URL parameters for easier customization.
+Currently, the embed is configured to load the stream at 854x480 (480p equivalent) and a volume of 90%.
+
+Below the embed are controls for passively interacting with the embed. Currently, only Volume is available as a control. This is a quick workaround for not being able to control the volume or routing of Browser Sources withing OBS.
 
 
 # Rationale
