@@ -1,28 +1,47 @@
 <html>
   <head>
     <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .controls {
+        margin-top: 10px;
+      }
+    </style>
   </head>
 
   <body>
     <div id="stream"></div>
+    <div class="controls">
+      Volume: <input type="number" id="volume-input" step="1" min="0" max="100" />
+    </div>
     <script type="text/javascript">
       const channel = window.location.hash;
-      const volume = window.location.search
-        ? parseInt(window.location.search.substr(1)) / 100.0
-        : 0.9;
-
       if(!channel) {
         document.querySelector("#stream").innerHTML = "No channel set in URL";
-      } else {
-        const options = {
-          width: 854,
-          height: 480,
-          channel: channel,
-          controls: false
-        };
-        const player = new Twitch.Player("stream", options);
-        player.setVolume(volume);
       }
+      const options = {
+        width: 854,
+        height: 480,
+        channel: channel,
+        controls: false
+      };
+      const player = new Twitch.Player("stream", options);
+      const initialVolume = window.location.search
+        ? parseInt(window.location.search.substr(1)) / 100.0
+        : 0.9;
+      player.setVolume(initialVolume);
+
+      const volumeInput = document.querySelector("#volume-input");
+      volumeInput.value = initialVolume * 100;
+      volumeInput.addEventListener("change", function(e) {
+        const newVolume = parseInt(e.target.value) / 100.0;
+        console.log("Setting volume to: ", newVolume);
+        player.setVolume(newVolume);
+      });
     </script>
   </body>
 </html>
