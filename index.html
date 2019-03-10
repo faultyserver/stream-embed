@@ -1,12 +1,15 @@
 <html>
   <head>
-    <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+    <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
   </head>
 
   <body>
     <div id="stream"></div>
     <script type="text/javascript">
       const channel = window.location.hash;
+      const volume = window.location.search
+        ? parseInt(window.location.search.substr(1)) / 100.0
+        : 0.9;
 
       if(!channel) {
         document.querySelector("#stream").innerHTML = "No channel set in URL";
@@ -18,7 +21,7 @@
           controls: false
         };
         const player = new Twitch.Player("stream", options);
-        player.setVolume(0.95);
+        player.setVolume(volume);
       }
     </script>
   </body>
