@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+  </head>
+
+  <body>
+    <div id="stream"></div>
+    <script type="text/javascript">
+      const channel = window.location.hash;
+
+      if(!channel) {
+        document.querySelector("#stream").innerHTML = "No channel set in URL";
+      } else {
+        const options = {
+          width: 854,
+          height: 480,
+          channel: channel,
+          controls: false
+        };
+        const player = new Twitch.Player("stream", options);
+        player.setVolume(0.8);
+      }
+    </script>
+  </body>
+</html>
